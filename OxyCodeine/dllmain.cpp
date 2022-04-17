@@ -19,12 +19,10 @@ auto loadfile = (__int64 (*)(__int64 instance, char* a2, __int64 a3))((uintptr_t
 
 DWORD WINAPI HelpMe() {
     while (!m_state) {
-		Sleep(10); // for not killing cpu
-		auto sc_lua = LI_MODULE("citizen-scripting-lua.dll").cached<HMODULE>();
-        auto runtime = Mem::Read<uintptr_t>((uintptr_t)sc_lua + 0xE9218); // + 0x50 to hit lua reg heap
-		m_state = Mem::Read<uintptr_t>(runtime + 0x10);
-
-		
+	Sleep(10); // for not killing cpu
+	auto sc_lua = LI_MODULE("citizen-scripting-lua.dll").cached<HMODULE>();
+       	auto runtime = Mem::Read<uintptr_t>((uintptr_t)sc_lua + 0xE9218); // + 0x50 to hit lua reg heap
+	m_state = Mem::Read<uintptr_t>(runtime + 0x10);	
     }
     if (m_state > 1) {
         try
